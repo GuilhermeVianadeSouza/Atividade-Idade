@@ -1,13 +1,10 @@
 package com.aulaandroid.atividade_aprendizado_sistema
 
-import android.R
-import android.R.attr.contentDescription
-import android.R.attr.onClick
-import android.R.attr.x
-import android.graphics.drawable.Icon
+
 import android.os.Bundle
 import android.text.Layout
 import android.util.Log
+import android.util.Log.i
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -53,7 +50,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.key.Key.Companion.J
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -95,47 +94,73 @@ fun GreetingPreview() {
 
 @Composable
 fun criandoTemplateTop(modifier: Modifier = Modifier){
+    var adicionando by remember {
+        mutableStateOf(0)
+    }
     Column(
         modifier = modifier
             .background(Color.White).fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(6.dp)
+        verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically)
     ) {
-        var adicionando by remember {
-            mutableStateOf(0)
-        }
-
         Text(
             text = "Qual é a sua idade?",
-            color = Color.Blue)
+            color = Color.Blue,
+            fontSize = 20.sp)
 
         Text(
             text = "Aperte os botões para informar a sua idade",
             fontSize = 10.sp
         )
+        Text(
+            text = "$adicionando"
+        )
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Absolute.Center
+            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
         ) {
             Button(
                 onClick = {
-                    adicionando = +1
+                    if (adicionando > 0){
+                        adicionando = adicionando - 1
+                    } else
+                    adicionando = 0
                 },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(28, 58, 176, 255)
+                ),
+                shape = RoundedCornerShape(10.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Ta joia padrao"
+                    painter = painterResource(id = R.drawable.outline_check_indeterminate_small_24),
+                    contentDescription = "Botão de subtrair",
                 )
             }
 
             OutlinedButton(
                 onClick = {
-                    adicionando = -1
-                }
+                    if (adicionando < 180) {
+                        adicionando = adicionando + 1
+                    } else {
+                        adicionando = 180
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(28, 58, 176, 255)
+                ),
+                shape = RoundedCornerShape(10.dp)
             ) {
-                Text(text = "")
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Adicionando"
+                )
             }
+        }
+        if (adicionando >= 18) {
+            Text(text = "Voce é MAIOR de idade")
+        } else {
+            Text(text = "Voce é MENOR de idade")
         }
     }
 
