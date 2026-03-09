@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -105,15 +106,16 @@ fun criandoTemplateTop(modifier: Modifier = Modifier){
     ) {
         Text(
             text = "Qual é a sua idade?",
-            color = Color.Blue,
-            fontSize = 20.sp)
+            color = Color(28, 58, 176, 255),
+            fontSize = 32.sp)
 
         Text(
             text = "Aperte os botões para informar a sua idade",
-            fontSize = 10.sp
+            fontSize = 18.sp
         )
         Text(
-            text = "$adicionando"
+            text = "$adicionando",
+            fontSize = 50.sp
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -130,7 +132,8 @@ fun criandoTemplateTop(modifier: Modifier = Modifier){
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(28, 58, 176, 255)
                 ),
-                shape = RoundedCornerShape(10.dp)
+                shape = RoundedCornerShape(10.dp),
+                modifier = modifier.size(65.dp)
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.outline_check_indeterminate_small_24),
@@ -149,7 +152,8 @@ fun criandoTemplateTop(modifier: Modifier = Modifier){
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(28, 58, 176, 255)
                 ),
-                shape = RoundedCornerShape(10.dp)
+                shape = RoundedCornerShape(10.dp),
+                modifier = modifier.size(65.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -158,9 +162,13 @@ fun criandoTemplateTop(modifier: Modifier = Modifier){
             }
         }
         if (adicionando >= 18) {
-            Text(text = "Voce é MAIOR de idade")
+            Text(text = "Voce é MAIOR de idade",
+                color = Color(28, 58, 176, 255),
+                fontSize = 28.sp)
         } else {
-            Text(text = "Voce é MENOR de idade")
+            Text(text = "Voce é MENOR de idade",
+                color = Color(28, 58, 176, 255),
+                fontSize = 28.sp)
         }
     }
 
